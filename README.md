@@ -1,1 +1,1 @@
-# ProyectoIntermodularPrimeroDAM
+# Gestor Entrenamientos
