@@ -5,4 +5,7 @@ module org.example.gestorentrenamientos {
 
     opens org.example.gestorentrenamientos to javafx.fxml;
     exports org.example.gestorentrenamientos;
+
+    opens org.example.gestorentrenamientos.controller to javafx.fxml;
+    exports org.example.gestorentrenamientos.controller;
 }

@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CrearEjercicioController implements Initializable {
+public class ExerciseInfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

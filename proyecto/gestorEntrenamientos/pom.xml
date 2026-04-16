@@ -66,7 +66,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.example.gestorentrenamientos/org.example.gestorentrenamientos.HelloApplication
+                                org.example.gestorentrenamientos/org.example.gestorentrenamientos.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
