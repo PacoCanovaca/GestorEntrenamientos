@@ -3,14 +3,21 @@ package org.example.gestorentrenamientos.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import lombok.Data;
+import org.example.gestorentrenamientos.Main;
 import org.example.gestorentrenamientos.data.DataSet;
 import org.example.gestorentrenamientos.model.Exercise;
 import org.example.gestorentrenamientos.model.ExerciseTable;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ExercisesManagerController implements Initializable {
@@ -77,6 +84,56 @@ public class ExercisesManagerController implements Initializable {
         clearFilters.setOnAction(event -> {
             setTableItems(exercisesTableList);
         });
+        addExerciseBtn.setOnAction(event -> {
+            Stage stage = new Stage();
+            try {
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("exercise-creator-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                stage.setTitle("Añadir ejercicio");
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        seeExerciseBtn.setOnAction(event -> {
+            ExerciseTable exerciseSelected = exercisesTable.getSelectionModel().getSelectedItem();
+            Stage stage = new Stage();
+            try {
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("exercise-info-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                stage.setTitle("Ver ejercicio");
+                ExerciseInfoController controller = loader.getController();
+                // TODO falta asignar el ejercicio seleccionado a la nueva ventana
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        removeExerciseBtn.setOnAction(event -> {
+            Alert alert;
+            ExerciseTable exerciseSelected = exercisesTable.getSelectionModel().getSelectedItem();
+            if (exerciseSelected == null) {
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Ejercicio no seleccionado");
+                alert.setContentText("No se ha seleccionado ningún ejercicio.");
+                alert.show();
+                return;
+            }
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar ejercicio");
+            alert.setContentText(String.format("¿Quieres eliminar el ejercicio '%s'?", exerciseSelected.getName()));
+            Optional<ButtonType> options = alert.showAndWait();
+            if (options.get() == ButtonType.OK) {
+                for (ExerciseTable exercise : exercisesTableList) {
+                    if (exerciseSelected.getId() == exercise.getId()) {
+                        exercisesTableList.remove(exercise);
+                        return;
+                    }
+                }
+            }
+        });
     }
 
     private void setTableItems(ObservableList<ExerciseTable> exercises) {
@@ -89,7 +146,7 @@ public class ExercisesManagerController implements Initializable {
 
     private void generateExercisesList() {
         for (Exercise exercise : DataSet.getExercises()) {
-            exercisesTableList.add(new ExerciseTable(exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
+            exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
         }
     }
 
