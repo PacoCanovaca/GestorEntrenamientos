@@ -22,7 +22,7 @@ public class DataSet {
             new Exercise(12, "Press banca con barra", "https://www.youtube.com/watch?v=SCVCLChPQFY", "", "Empuje horizontal")
     );
 
-    private static ObservableList<String> movementTypes = FXCollections.observableArrayList("Tracción vertical", "Tracción horizontal", "Empuje vertical", "Empuje horizontal", "(Todos)");
+    private static ObservableList<String> movementTypes = FXCollections.observableArrayList("Tracción vertical", "Tracción horizontal", "Empuje vertical", "Empuje horizontal", null);
 
     private DataSet() {}
 

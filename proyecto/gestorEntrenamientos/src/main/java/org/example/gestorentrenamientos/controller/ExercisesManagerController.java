@@ -26,7 +26,7 @@ public class ExercisesManagerController implements Initializable {
     private Button addExerciseBtn;
 
     @FXML
-    private Button clearFilters;
+    private Button refreshBtn;
 
     @FXML
     private TableColumn<?, ?> descriptionCol;
@@ -69,7 +69,6 @@ public class ExercisesManagerController implements Initializable {
     }
 
     private void instances() {
-        exercisesTableList = FXCollections.observableArrayList();
         generateExercisesList();
         setTableItems(exercisesTableList);
         filterTypeCombo.setItems(DataSet.getMovementTypes());
@@ -81,7 +80,8 @@ public class ExercisesManagerController implements Initializable {
             String movementType = filterTypeCombo.getSelectionModel().getSelectedItem();
             filterExercises(name, movementType);
         });
-        clearFilters.setOnAction(event -> {
+        refreshBtn.setOnAction(event -> {
+            generateExercisesList();
             setTableItems(exercisesTableList);
         });
         addExerciseBtn.setOnAction(event -> {
@@ -126,9 +126,11 @@ public class ExercisesManagerController implements Initializable {
             alert.setContentText(String.format("¿Quieres eliminar el ejercicio '%s'?", exerciseSelected.getName()));
             Optional<ButtonType> options = alert.showAndWait();
             if (options.get() == ButtonType.OK) {
-                for (ExerciseTable exercise : exercisesTableList) {
+                for (Exercise exercise : DataSet.getExercises()) {
                     if (exerciseSelected.getId() == exercise.getId()) {
-                        exercisesTableList.remove(exercise);
+                        DataSet.getExercises().remove(exercise);
+                        generateExercisesList();
+                        setTableItems(exercisesTableList);
                         return;
                     }
                 }
@@ -145,6 +147,7 @@ public class ExercisesManagerController implements Initializable {
     }
 
     private void generateExercisesList() {
+        exercisesTableList = FXCollections.observableArrayList();
         for (Exercise exercise : DataSet.getExercises()) {
             exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
         }
