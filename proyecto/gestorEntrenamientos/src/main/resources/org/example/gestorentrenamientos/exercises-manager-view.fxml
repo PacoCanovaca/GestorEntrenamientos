@@ -55,6 +55,11 @@
                   <ComboBox fx:id="filterTypeCombo" maxWidth="1.7976931348623157E308" prefWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <TextField fx:id="filterNameText" prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" />
                   <Button fx:id="filterBtn" mnemonicParsing="false" text="Filtrar" GridPane.columnIndex="2" GridPane.rowSpan="2" />
+                  <Button fx:id="clearFilters" mnemonicParsing="false" text="Limpiar filtro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowSpan="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
                </children>
             </GridPane>
             <TableView fx:id="exercisesTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" prefWidth="200.0">

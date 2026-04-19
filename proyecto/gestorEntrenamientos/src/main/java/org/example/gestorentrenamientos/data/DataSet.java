@@ -22,6 +22,8 @@ public class DataSet {
             new Exercise(12, "Press banca con barra", "https://www.youtube.com/watch?v=SCVCLChPQFY", "", "Empuje horizontal")
     );
 
+    private static ObservableList<String> movementTypes = FXCollections.observableArrayList("Tracción vertical", "Tracción horizontal", "Empuje vertical", "Empuje horizontal", "(Todos)");
+
     private DataSet() {}
 
     public static ObservableList<Exercise> getExercises() {
@@ -30,5 +32,13 @@ public class DataSet {
 
     public static void setExercises(ObservableList<Exercise> exercises) {
         DataSet.exercises = exercises;
+    }
+
+    public static ObservableList<String> getMovementTypes() {
+        return movementTypes;
+    }
+
+    public static void setMovementTypes(ObservableList<String> movementTypes) {
+        DataSet.movementTypes = movementTypes;
     }
 }
