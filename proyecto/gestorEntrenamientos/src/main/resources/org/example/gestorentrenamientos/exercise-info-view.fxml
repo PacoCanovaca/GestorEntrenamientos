@@ -24,7 +24,7 @@
         <GridPane hgap="10.0" vgap="10.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="148.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="330.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="330.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -39,11 +39,11 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enlace a vídeo:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Explicación:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.rowSpan="2" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de movimiento:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" GridPane.columnIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enlace" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Explicacion" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo movimiento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" text="Editar ejercicio" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" GridPane.columnIndex="1" />
+            <Text fx:id="urlText" strokeType="OUTSIDE" strokeWidth="0.0" text="Enlace" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="descriptionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Explicacion" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+            <Text fx:id="movementTypeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo movimiento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="editBtn" mnemonicParsing="false" text="Editar ejercicio" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             </children>
          <padding>
             <Insets bottom="15.0" left="30.0" right="30.0" />

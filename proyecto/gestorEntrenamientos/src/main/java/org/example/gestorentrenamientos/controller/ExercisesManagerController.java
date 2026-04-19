@@ -105,7 +105,11 @@ public class ExercisesManagerController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Ver ejercicio");
                 ExerciseInfoController controller = loader.getController();
-                // TODO falta asignar el ejercicio seleccionado a la nueva ventana
+                controller.setExerciseId(exerciseSelected.getId());
+                controller.getNameText().setText(exerciseSelected.getName());
+                controller.getUrlText().setText(exerciseSelected.getUrl());
+                controller.getDescriptionText().setText(exerciseSelected.getDescription());
+                controller.getMovementTypeText().setText(exerciseSelected.getMovementType());
                 stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);

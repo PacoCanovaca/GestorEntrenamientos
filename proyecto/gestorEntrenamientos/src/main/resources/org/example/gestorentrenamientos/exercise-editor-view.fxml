@@ -42,11 +42,11 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enlace a vídeo:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Explicación:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.rowSpan="2" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de movimiento:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                <TextField GridPane.columnIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-                <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button mnemonicParsing="false" text="Guardar cambios" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="urlTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+                <ComboBox fx:id="typeComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Button fx:id="saveBtn" mnemonicParsing="false" text="Guardar cambios" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             </children>
          <padding>
             <Insets bottom="15.0" left="30.0" right="30.0" />
