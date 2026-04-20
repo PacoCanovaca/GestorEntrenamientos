@@ -2,14 +2,15 @@ package org.example.gestorentrenamientos.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import lombok.Data;
 import org.example.gestorentrenamientos.Main;
 import org.example.gestorentrenamientos.data.DataSet;
 import org.example.gestorentrenamientos.model.Exercise;
@@ -36,7 +37,7 @@ public class ExercisesManagerController implements Initializable {
 
     private ObservableList<ExerciseTable> exercisesTableList;
 
-    private ObservableList<ExerciseTable> filteredExercisesTableList;
+    private FilteredList<ExerciseTable> filteredExercisesTableList;
 
     @FXML
     private Button filterBtn;
@@ -70,7 +71,7 @@ public class ExercisesManagerController implements Initializable {
 
     private void instances() {
         generateExercisesList();
-        setTableItems(exercisesTableList);
+        setTableItems();
         filterTypeCombo.setItems(DataSet.getMovementTypes());
     }
 
@@ -82,7 +83,7 @@ public class ExercisesManagerController implements Initializable {
         });
         refreshBtn.setOnAction(event -> {
             generateExercisesList();
-            setTableItems(exercisesTableList);
+            setTableItems();
         });
         addExerciseBtn.setOnAction(event -> {
             Stage stage = new Stage();
@@ -101,15 +102,12 @@ public class ExercisesManagerController implements Initializable {
             Stage stage = new Stage();
             try {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("exercise-info-view.fxml"));
-                Scene scene = new Scene(loader.load());
+                Parent root = loader.load();
+                ExerciseInfoController controller = loader.getController();
+                controller.setExercise(exerciseSelected);
+                Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Ver ejercicio");
-                ExerciseInfoController controller = loader.getController();
-                controller.setExerciseId(exerciseSelected.getId());
-                controller.getNameText().setText(exerciseSelected.getName());
-                controller.getUrlText().setText(exerciseSelected.getUrl());
-                controller.getDescriptionText().setText(exerciseSelected.getDescription());
-                controller.getMovementTypeText().setText(exerciseSelected.getMovementType());
                 stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -134,7 +132,7 @@ public class ExercisesManagerController implements Initializable {
                     if (exerciseSelected.getId() == exercise.getId()) {
                         DataSet.getExercises().remove(exercise);
                         generateExercisesList();
-                        setTableItems(exercisesTableList);
+                        setTableItems();
                         return;
                     }
                 }
@@ -142,8 +140,8 @@ public class ExercisesManagerController implements Initializable {
         });
     }
 
-    private void setTableItems(ObservableList<ExerciseTable> exercises) {
-        exercisesTable.setItems(exercises);
+    public void setTableItems() { // TODO ¿hacerlo static y así poder refrescar también cuando haga algo desde otra ventana? (añadir o modificar ejercicio)
+        exercisesTable.setItems(filteredExercisesTableList);
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("movementType"));
         urlCol.setCellValueFactory(new PropertyValueFactory<>("url"));
@@ -155,16 +153,15 @@ public class ExercisesManagerController implements Initializable {
         for (Exercise exercise : DataSet.getExercises()) {
             exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
         }
+        filteredExercisesTableList = new FilteredList<>(exercisesTableList);
     }
 
     private void filterExercisesByName(String name) {
-        filteredExercisesTableList = FXCollections.observableArrayList(exercisesTableList.stream().filter(exercise -> exercise.getName().toLowerCase().contains(name.toLowerCase())).toList());
-        setTableItems(filteredExercisesTableList);
+        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getName().toLowerCase().contains(name));
     }
 
     private void filterExercisesByType(String movementType) {
-        filteredExercisesTableList = FXCollections.observableArrayList(exercisesTableList.stream().filter(exercise -> exercise.getMovementType().equalsIgnoreCase(movementType)).toList());
-        setTableItems(filteredExercisesTableList);
+        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType));
     }
 
     private void filterExercises(String name, String movementType) {
@@ -173,8 +170,7 @@ public class ExercisesManagerController implements Initializable {
         } else if (movementType != null && name == null) {
             filterExercisesByType(movementType);
         } else if (movementType != null && name != null) {
-            filteredExercisesTableList = FXCollections.observableArrayList(exercisesTableList.stream().filter(exercise -> exercise.getName().toLowerCase().contains(name.toLowerCase()) && exercise.getMovementType().equalsIgnoreCase(movementType)).toList());
-            setTableItems(filteredExercisesTableList);
+            filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType) && exerciseTable.getName().toLowerCase().contains(name));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Filtro no introducido");

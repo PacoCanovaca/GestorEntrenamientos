@@ -4,14 +4,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import lombok.Setter;
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import org.example.gestorentrenamientos.data.DataSet;
 import org.example.gestorentrenamientos.model.Exercise;
+import org.example.gestorentrenamientos.model.ExerciseTable;
 
 public class ExerciseEditorController implements Initializable {
 
@@ -30,8 +28,9 @@ public class ExerciseEditorController implements Initializable {
     @FXML
     private TextField urlTextField;
 
-    @Setter
-    int exerciseId;
+    private int exerciseId;
+
+    private ExerciseTable exercise;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,16 +80,12 @@ public class ExerciseEditorController implements Initializable {
         });
     }
 
-    public TextArea getDescriptionTextArea() {
-        return descriptionTextArea;
-    }
-
-    public TextField getNameTextField() {
-        return nameTextField;
-    }
-
-    public TextField getUrlTextField() {
-        return urlTextField;
+    public void setExercise(ExerciseTable exercise) {
+        this.exercise = exercise;
+        exerciseId = exercise.getId();
+        nameTextField.setText(exercise.getName());
+        urlTextField.setText(exercise.getUrl());
+        descriptionTextArea.setText(exercise.getDescription());
     }
 
     private boolean existsName(String name) {

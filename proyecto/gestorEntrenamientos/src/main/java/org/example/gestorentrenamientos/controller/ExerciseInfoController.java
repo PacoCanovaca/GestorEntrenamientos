@@ -7,14 +7,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import lombok.Setter;
 import org.example.gestorentrenamientos.Main;
-import org.example.gestorentrenamientos.data.DataSet;
-import org.example.gestorentrenamientos.model.Exercise;
+import org.example.gestorentrenamientos.model.ExerciseTable;
 
 public class ExerciseInfoController implements Initializable {
 
@@ -33,8 +32,9 @@ public class ExerciseInfoController implements Initializable {
     @FXML
     private Text urlText;
 
-    @Setter
     private int exerciseId;
+
+    private ExerciseTable exercise;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,14 +46,12 @@ public class ExerciseInfoController implements Initializable {
             Stage stage = new Stage();
             try {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("exercise-editor-view.fxml"));
-                Scene scene = new Scene(loader.load());
+                Parent root = loader.load();
+                ExerciseEditorController controller = loader.getController();
+                controller.setExercise(exercise);
+                Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Editar ejercicio");
-                ExerciseEditorController controller = loader.getController();
-                controller.setExerciseId(exerciseId);
-                controller.getNameTextField().setText(nameText.getText());
-                controller.getUrlTextField().setText(urlText.getText());
-                controller.getDescriptionTextArea().setText(descriptionText.getText());
                 stage.show();
                 ((Stage) editBtn.getScene().getWindow()).close();
             } catch (IOException e) {
@@ -62,19 +60,12 @@ public class ExerciseInfoController implements Initializable {
         });
     }
 
-    public Text getDescriptionText() {
-        return descriptionText;
-    }
-
-    public Text getMovementTypeText() {
-        return movementTypeText;
-    }
-
-    public Text getNameText() {
-        return nameText;
-    }
-
-    public Text getUrlText() {
-        return urlText;
+    public void setExercise(ExerciseTable exercise) {
+        this.exercise = exercise;
+        exerciseId = exercise.getId();
+        nameText.setText(exercise.getName());
+        urlText.setText(exercise.getUrl());
+        descriptionText.setText(exercise.getDescription());
+        movementTypeText.setText(exercise.getMovementType());
     }
 }
