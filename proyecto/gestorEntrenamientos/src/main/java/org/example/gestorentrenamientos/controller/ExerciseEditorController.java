@@ -67,7 +67,7 @@ public class ExerciseEditorController implements Initializable {
                         exercise.setName(nameTextField.getText());
                         exercise.setUrl(urlTextField.getText());
                         exercise.setDescription(descriptionTextArea.getText());
-                        exercise.setMovementType(typeComboBox.getSelectionModel().getSelectedItem());
+                        exercise.setMovementType(Integer.parseInt(typeComboBox.getSelectionModel().getSelectedItem()));
                     }
                 }
                 alert = new Alert(Alert.AlertType.INFORMATION);

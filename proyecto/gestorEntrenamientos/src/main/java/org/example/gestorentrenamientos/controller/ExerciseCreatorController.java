@@ -58,7 +58,7 @@ public class ExerciseCreatorController implements Initializable {
                 alert.show();
             } else {
                 ObservableList<Exercise> exercises = DataSet.getExercises();
-                exercises.add(new Exercise(exercises.getLast().getId() + 1, nameText.getText(), urlText.getText(), descriptionText.getText(), typeComboBox.getSelectionModel().getSelectedItem()));
+                exercises.add(new Exercise(exercises.getLast().getId() + 1, Integer.parseInt(typeComboBox.getSelectionModel().getSelectedItem()), nameText.getText(), urlText.getText(), descriptionText.getText()));
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ejercicio añadido");
                 alert.setContentText("El ejercicio ha sido añadido a la base de datos");

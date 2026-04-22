@@ -11,10 +11,10 @@ import lombok.Setter;
 @Setter
 public class Exercise {
 
-    private int id;
-    private String name, url, description, movementType;
+    private int id, movementType;
+    private String name, url, description;
 
-    public Exercise(String name, String url, String description, String movementType) {
+    public Exercise(String name, String url, String description, int movementType) {
         this.name = name;
         this.url = url;
         this.description = description;

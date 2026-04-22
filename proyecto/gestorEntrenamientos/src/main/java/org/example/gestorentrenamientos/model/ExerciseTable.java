@@ -1,18 +1,20 @@
 package org.example.gestorentrenamientos.model;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 
 public class ExerciseTable {
 
-    SimpleStringProperty  name, movementType, url, description;
+    SimpleStringProperty  name, url, description;
+    SimpleIntegerProperty movementType;
     @Getter
     int id;
 
-    public ExerciseTable(int id, String name, String movementType, String url, String description) {
+    public ExerciseTable(int id, String name, int movementType, String url, String description) {
         this.id = id;
         this.name = new SimpleStringProperty(name);
-        this.movementType = new SimpleStringProperty(movementType);
+        this.movementType = new SimpleIntegerProperty(movementType);
         this.url = new SimpleStringProperty(url);
         this.description = new SimpleStringProperty(description);
     }
@@ -25,11 +27,11 @@ public class ExerciseTable {
         return name;
     }
 
-    public String getMovementType() {
+    public int getMovementType() {
         return movementType.get();
     }
 
-    public SimpleStringProperty movementTypeProperty() {
+    public SimpleIntegerProperty movementTypeProperty() {
         return movementType;
     }
 

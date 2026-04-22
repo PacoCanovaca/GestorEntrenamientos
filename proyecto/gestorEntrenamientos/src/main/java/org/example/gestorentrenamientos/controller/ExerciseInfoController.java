@@ -66,6 +66,6 @@ public class ExerciseInfoController implements Initializable {
         nameText.setText(exercise.getName());
         urlText.setText(exercise.getUrl());
         descriptionText.setText(exercise.getDescription());
-        movementTypeText.setText(exercise.getMovementType());
+        movementTypeText.setText(String.valueOf(exercise.getMovementType()));
     }
 }

@@ -7,6 +7,6 @@ public interface DBExerciseScheme {
     String COL_ID_MOVEMENT = "id_tipo_movimiento";
     String COL_NAME = "nombre";
     String COL_URL = "enlace_video";
-    String COL_DEFINITION = "explicacion";
+    String COL_DESCRIPTION = "explicacion";
 
 }

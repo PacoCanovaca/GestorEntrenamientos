@@ -78,7 +78,7 @@ public class ExercisesManagerController implements Initializable {
     private void actions() {
         filterBtn.setOnAction(event -> {
             String name = filterNameText.getText();
-            String movementType = filterTypeCombo.getSelectionModel().getSelectedItem();
+            int movementType = Integer.parseInt(filterTypeCombo.getSelectionModel().getSelectedItem());
             filterExercises(name, movementType);
         });
         refreshBtn.setOnAction(event -> {
@@ -160,17 +160,17 @@ public class ExercisesManagerController implements Initializable {
         filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getName().toLowerCase().contains(name));
     }
 
-    private void filterExercisesByType(String movementType) {
-        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType));
+    private void filterExercisesByType(int movementType) {
+        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType() == movementType);
     }
 
-    private void filterExercises(String name, String movementType) {
-        if (name != null && movementType == null) {
+    private void filterExercises(String name, int movementType) {
+        if (name != null && movementType > 0) {
             filterExercisesByName(name);
-        } else if (movementType != null && name == null) {
+        } else if (movementType <= 0 && name == null) {
             filterExercisesByType(movementType);
-        } else if (movementType != null && name != null) {
-            filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType) && exerciseTable.getName().toLowerCase().contains(name));
+        } else if (movementType <= 0 && name != null) {
+            filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType() == movementType && exerciseTable.getName().toLowerCase().contains(name));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Filtro no introducido");
