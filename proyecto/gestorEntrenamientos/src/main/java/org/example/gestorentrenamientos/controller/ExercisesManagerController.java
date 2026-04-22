@@ -140,7 +140,7 @@ public class ExercisesManagerController implements Initializable {
         });
     }
 
-    public void setTableItems() { // TODO ¿hacerlo static y así poder refrescar también cuando haga algo desde otra ventana? (añadir o modificar ejercicio)
+    public void setTableItems() {
         exercisesTable.setItems(filteredExercisesTableList);
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("movementType"));
