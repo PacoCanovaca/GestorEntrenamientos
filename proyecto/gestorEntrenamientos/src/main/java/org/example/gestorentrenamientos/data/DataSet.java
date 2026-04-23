@@ -29,7 +29,7 @@ public class DataSet {
 
     private static MovementTypes[] movementTypes = MovementTypes.values();
 
-    private static ObservableList<String> movementTypesNames = (ObservableList<String>) Arrays.stream(movementTypes).map(MovementTypes::getName).toList();
+    private static ObservableList<String> movementTypesNames = FXCollections.observableArrayList(Arrays.stream(movementTypes).map(MovementTypes::getName).toList());
 
     private DataSet() {}
 
@@ -59,5 +59,16 @@ public class DataSet {
             }
         }
         return id;
+    }
+
+    public static String getMovementTypeNameById(int id) {
+        String name = null;
+        for (MovementTypes movementType : movementTypes) {
+            if (id == movementType.getId()){
+                name = movementType.getName();
+                break;
+            }
+        }
+        return name;
     }
 }

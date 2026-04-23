@@ -21,7 +21,8 @@ public enum MovementTypes {
     CARDIO(14, "Cardio", "Actividad física rítmica y continua diseñada para elevar la frecuencia cardíaca, mejorando la resistencia aeróbica y la salud cardiovascular."),
     CLEAN(15, "Clean", "Movimiento explosivo propio de la halterofilia en el que se levanta la barra desde el suelo (o posiciones colgantes) hasta apoyarla sobre los hombros frontales en un solo movimiento rápido."),
     YERK(16, "Yerk", "Segundo movimiento clásico de halterofilia. Consiste en impulsar la carga de forma explosiva desde los hombros hasta la extensión completa de los brazos por encima de la cabeza, usando el empuje de las piernas."),
-    SNATCH(17, "Snatch", "Movimiento de halterofilia altamente técnico y rápido donde se levanta la barra desde el suelo hasta por encima de la cabeza, con los brazos completamente extendidos, en un único movimiento ininterrumpido.");
+    SNATCH(17, "Snatch", "Movimiento de halterofilia altamente técnico y rápido donde se levanta la barra desde el suelo hasta por encima de la cabeza, con los brazos completamente extendidos, en un único movimiento ininterrumpido."),
+    NULL(-1, null, null);
 
     private final int id;
     private final String name;

@@ -68,6 +68,7 @@ public class ExerciseCreatorController implements Initializable {
                     alert.setContentText("Debes seleccionar un tipo de movimiento para el ejercicio.");
                     alert.show();
                 } else {
+                    System.out.println(e.getMessage()); // TODO QUITAR CUANDO ARREGLE EL PROBLEMA
                     alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error desconocido");
                     alert.setContentText("Se ha producido un error sin identificar a la hora de crear el nuevo ejercicio.");

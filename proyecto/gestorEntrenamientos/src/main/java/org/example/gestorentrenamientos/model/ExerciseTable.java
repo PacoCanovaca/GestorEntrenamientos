@@ -6,15 +6,14 @@ import lombok.Getter;
 
 public class ExerciseTable {
 
-    SimpleStringProperty  name, url, description;
-    SimpleIntegerProperty movementType;
+    SimpleStringProperty  name, url, description, movementType;
     @Getter
     int id;
 
-    public ExerciseTable(int id, String name, int movementType, String url, String description) {
+    public ExerciseTable(int id, String name, String movementType, String url, String description) {
         this.id = id;
         this.name = new SimpleStringProperty(name);
-        this.movementType = new SimpleIntegerProperty(movementType);
+        this.movementType = new SimpleStringProperty(movementType);
         this.url = new SimpleStringProperty(url);
         this.description = new SimpleStringProperty(description);
     }
@@ -27,11 +26,11 @@ public class ExerciseTable {
         return name;
     }
 
-    public int getMovementType() {
+    public String getMovementType() {
         return movementType.get();
     }
 
-    public SimpleIntegerProperty movementTypeProperty() {
+    public SimpleStringProperty movementTypeProperty() {
         return movementType;
     }
 

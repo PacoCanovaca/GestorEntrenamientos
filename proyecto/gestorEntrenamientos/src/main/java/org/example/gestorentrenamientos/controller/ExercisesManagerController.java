@@ -80,7 +80,7 @@ public class ExercisesManagerController implements Initializable {
     private void actions() {
         filterBtn.setOnAction(event -> {
             String name = filterNameText.getText();
-            int movementType = DataSet.getMovementTypeIdByName(filterTypeCombo.getSelectionModel().getSelectedItem());
+            String movementType = filterTypeCombo.getSelectionModel().getSelectedItem();
             filterExercises(name, movementType);
         });
         refreshBtn.setOnAction(event -> {
@@ -156,7 +156,7 @@ public class ExercisesManagerController implements Initializable {
         try {
             DataSet.importDataSet();
             for (Exercise exercise : DataSet.getExercises()) {
-                exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
+                exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), DataSet.getMovementTypeNameById(exercise.getMovementType()), exercise.getUrl(), exercise.getDescription()));
             }
             filteredExercisesTableList = new FilteredList<>(exercisesTableList);
         } catch (SQLException e) {
@@ -171,17 +171,17 @@ public class ExercisesManagerController implements Initializable {
         filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getName().toLowerCase().contains(name));
     }
 
-    private void filterExercisesByType(int movementType) {
-        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType() == movementType);
+    private void filterExercisesByType(String movementType) {
+        filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType));
     }
 
-    private void filterExercises(String name, int movementType) {
-        if (name != null && movementType > 0) {
+    private void filterExercises(String name, String movementType) {
+        if (name != null && movementType == null) {
             filterExercisesByName(name);
-        } else if (movementType <= 0 && name == null) {
+        } else if (movementType != null && name == null) {
             filterExercisesByType(movementType);
-        } else if (movementType <= 0 && name != null) {
-            filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType() == movementType && exerciseTable.getName().toLowerCase().contains(name));
+        } else if (movementType != null && name != null) {
+            filteredExercisesTableList.setPredicate(exerciseTable -> exerciseTable.getMovementType().equalsIgnoreCase(movementType) && exerciseTable.getName().toLowerCase().contains(name));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Filtro no introducido");
