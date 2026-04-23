@@ -18,6 +18,7 @@ import org.example.gestorentrenamientos.model.ExerciseTable;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -150,10 +151,18 @@ public class ExercisesManagerController implements Initializable {
 
     private void generateExercisesList() {
         exercisesTableList = FXCollections.observableArrayList();
-        for (Exercise exercise : DataSet.getExercises()) {
-            exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
+        try {
+            DataSet.importDataSet();
+            for (Exercise exercise : DataSet.getExercises()) {
+                exercisesTableList.add(new ExerciseTable(exercise.getId(), exercise.getName(), exercise.getMovementType(), exercise.getUrl(), exercise.getDescription()));
+            }
+            filteredExercisesTableList = new FilteredList<>(exercisesTableList);
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error en la importación.");
+            alert.setContentText("No se ha podido importar los ejercicios de la base de datos.");
+            alert.show();
         }
-        filteredExercisesTableList = new FilteredList<>(exercisesTableList);
     }
 
     private void filterExercisesByName(String name) {

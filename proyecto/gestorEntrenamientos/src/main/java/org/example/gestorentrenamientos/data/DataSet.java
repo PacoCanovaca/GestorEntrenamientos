@@ -2,12 +2,15 @@ package org.example.gestorentrenamientos.data;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.gestorentrenamientos.dao.ExerciseDao;
 import org.example.gestorentrenamientos.model.Exercise;
+
+import java.sql.SQLException;
 
 public class DataSet {
 
     // DataSet de prueba antes de conectar con la base de datos
-    private static ObservableList<Exercise> exercises = FXCollections.observableArrayList(
+    private static ObservableList<Exercise> exercises = FXCollections.observableArrayList(/*
             new Exercise(1, "Dominada", "https://www.youtube.com/watch?v=un6HKZo2Mhs", "Subiremos de manera explosiva y aguantaremos la fase de bajada. Al bajar es importante no perder la tensión muscular por completo ni descolgar los hombros.", "Tracción vertical"),
             new Exercise(2, "Jalon al pecho", "https://www.youtube.com/watch?v=ShqtJk37UPM", "Tracciona llevando la barra hacia zona del esternón. Los hombros irán hacia atras (simulando sacar pecho), evitaremos que los hombros roten hacia dentro al tracionar. En la fase excéntrica iremos lento y controlado, sin que perdamos tensión al final del rango.", "Tracción vertical"),
             new Exercise(3, "Remo en cuerda", "https://www.youtube.com/watch?v=vRsHJtFbyDY", "", "Tracción vertical"),
@@ -19,12 +22,17 @@ public class DataSet {
             new Exercise(9, "Push press", "https://www.youtube.com/watch?v=d0d0TWaiukA", "", "Empuje vertical"),
             new Exercise(10, "Aperturas con mancuernas", "https://www.youtube.com/watch?v=z8juzhSsFKU", "", "Empuje horizontal"),
             new Exercise(11, "Flexiones", "https://www.youtube.com/watch?v=mm6_WcoCVTA&list=PLyqKj7LwU2RuyZwWCIiDHuFZGN11QW3Ff&index=26", "", "Empuje horizontal"),
-            new Exercise(12, "Press banca con barra", "https://www.youtube.com/watch?v=SCVCLChPQFY", "", "Empuje horizontal")
+            new Exercise(12, "Press banca con barra", "https://www.youtube.com/watch?v=SCVCLChPQFY", "", "Empuje horizontal")*/
     );
 
     private static ObservableList<String> movementTypes = FXCollections.observableArrayList("Tracción vertical", "Tracción horizontal", "Empuje vertical", "Empuje horizontal", null);
 
     private DataSet() {}
+
+    public static void importDataSet() throws SQLException {
+        ExerciseDao exerciseDao = new ExerciseDao();
+        exercises = exerciseDao.readExercises();
+    }
 
     public static ObservableList<Exercise> getExercises() {
         return exercises;
