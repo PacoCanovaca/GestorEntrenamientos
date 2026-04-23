@@ -4,8 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.gestorentrenamientos.dao.ExerciseDao;
 import org.example.gestorentrenamientos.model.Exercise;
+import org.example.gestorentrenamientos.model.MovementTypes;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class DataSet {
 
@@ -25,7 +27,9 @@ public class DataSet {
             new Exercise(12, "Press banca con barra", "https://www.youtube.com/watch?v=SCVCLChPQFY", "", "Empuje horizontal")*/
     );
 
-    private static ObservableList<String> movementTypes = FXCollections.observableArrayList("Tracción vertical", "Tracción horizontal", "Empuje vertical", "Empuje horizontal", null);
+    private static MovementTypes[] movementTypes = MovementTypes.values();
+
+    private static ObservableList<String> movementTypesNames = (ObservableList<String>) Arrays.stream(movementTypes).map(MovementTypes::getName).toList();
 
     private DataSet() {}
 
@@ -42,11 +46,18 @@ public class DataSet {
         DataSet.exercises = exercises;
     }
 
-    public static ObservableList<String> getMovementTypes() {
-        return movementTypes;
+    public static ObservableList<String> getMovementTypesNames() {
+        return movementTypesNames;
     }
 
-    public static void setMovementTypes(ObservableList<String> movementTypes) {
-        DataSet.movementTypes = movementTypes;
+    public static int getMovementTypeIdByName(String name) {
+        int id = 0;
+        for (MovementTypes movementType : movementTypes) {
+            if (name.equalsIgnoreCase(movementType.getName())){
+                id = movementType.getId();
+                break;
+            }
+        }
+        return id;
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.gestorentrenamientos.Main;
+import org.example.gestorentrenamientos.dao.ExerciseDao;
 import org.example.gestorentrenamientos.data.DataSet;
 import org.example.gestorentrenamientos.model.Exercise;
 import org.example.gestorentrenamientos.model.ExerciseTable;
@@ -73,13 +74,13 @@ public class ExercisesManagerController implements Initializable {
     private void instances() {
         generateExercisesList();
         setTableItems();
-        filterTypeCombo.setItems(DataSet.getMovementTypes());
+        filterTypeCombo.setItems(DataSet.getMovementTypesNames());
     }
 
     private void actions() {
         filterBtn.setOnAction(event -> {
             String name = filterNameText.getText();
-            int movementType = Integer.parseInt(filterTypeCombo.getSelectionModel().getSelectedItem());
+            int movementType = DataSet.getMovementTypeIdByName(filterTypeCombo.getSelectionModel().getSelectedItem());
             filterExercises(name, movementType);
         });
         refreshBtn.setOnAction(event -> {
@@ -129,13 +130,14 @@ public class ExercisesManagerController implements Initializable {
             alert.setContentText(String.format("¿Quieres eliminar el ejercicio '%s'?", exerciseSelected.getName()));
             Optional<ButtonType> options = alert.showAndWait();
             if (options.get() == ButtonType.OK) {
-                for (Exercise exercise : DataSet.getExercises()) {
-                    if (exerciseSelected.getId() == exercise.getId()) {
-                        DataSet.getExercises().remove(exercise);
-                        generateExercisesList();
-                        setTableItems();
-                        return;
-                    }
+                ExerciseDao exerciseDao = new ExerciseDao();
+                try {
+                    exerciseDao.deleteExercise(exerciseSelected.getId());
+                } catch (SQLException e) {
+                    alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error de borrado");
+                    alert.setContentText("No ha sido posible eliminar el ejercicio de la base de datos");
+                    alert.show();
                 }
             }
         });

@@ -14,7 +14,7 @@ public class Exercise {
     private int id, movementType;
     private String name, url, description;
 
-    public Exercise(String name, String url, String description, int movementType) {
+    public Exercise(int MovementType, String name, String url, String description) {
         this.name = name;
         this.url = url;
         this.description = description;

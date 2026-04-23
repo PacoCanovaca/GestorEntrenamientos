@@ -1,6 +1,9 @@
 package org.example.gestorentrenamientos.model;
 
-public enum MovementType {
+import lombok.Getter;
+
+@Getter
+public enum MovementTypes {
 
     TRACCIONVERTICAL(1, "Tracción vertical", "Movimiento que consiste en tirar de una carga de arriba hacia abajo, o elevar el propio cuerpo. Se enfoca principalmente en el dorsal ancho y los bíceps."),
     TRACCIONHORIZONTAL(2, "Tracción horizontal", "Movimiento de acercar una carga hacia el torso en un plano horizontal. Trabaja el grosor de la espalda, romboides y trapecios."),
@@ -21,24 +24,13 @@ public enum MovementType {
     SNATCH(17, "Snatch", "Movimiento de halterofilia altamente técnico y rápido donde se levanta la barra desde el suelo hasta por encima de la cabeza, con los brazos completamente extendidos, en un único movimiento ininterrumpido.");
 
     private final int id;
-    private final String nombre;
-    private final String descripcion;
+    private final String name;
+    private final String description;
 
-    MovementType(int id, String nombre, String descripcion) {
+    MovementTypes(int id, String name, String description) {
         this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.name = name;
+        this.description = description;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
 }
