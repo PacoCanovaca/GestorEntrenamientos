@@ -68,7 +68,22 @@ public class ExercisesManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instances();
+        initGUI();
         actions();
+    }
+
+    private void initGUI() {
+        removeExerciseBtn.setDisable(true);
+        seeExerciseBtn.setDisable(true);
+        exercisesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                removeExerciseBtn.setDisable(false);
+                seeExerciseBtn.setDisable(false);
+            } else {
+                removeExerciseBtn.setDisable(true);
+                seeExerciseBtn.setDisable(true);
+            }
+        });
     }
 
     private void instances() {

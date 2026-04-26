@@ -1,6 +1,5 @@
 package org.example.gestorentrenamientos.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 
@@ -22,31 +21,15 @@ public class ExerciseTable {
         return name.get();
     }
 
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
-
     public String getMovementType() {
         return movementType.get();
-    }
-
-    public SimpleStringProperty movementTypeProperty() {
-        return movementType;
     }
 
     public String getUrl() {
         return url.get();
     }
 
-    public SimpleStringProperty urlProperty() {
-        return url;
-    }
-
     public String getDescription() {
         return description.get();
-    }
-
-    public SimpleStringProperty descriptionProperty() {
-        return description;
     }
 }

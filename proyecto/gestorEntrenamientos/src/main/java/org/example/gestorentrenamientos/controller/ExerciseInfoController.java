@@ -10,7 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.gestorentrenamientos.Main;
 import org.example.gestorentrenamientos.model.ExerciseTable;
@@ -18,21 +19,19 @@ import org.example.gestorentrenamientos.model.ExerciseTable;
 public class ExerciseInfoController implements Initializable {
 
     @FXML
-    private Text descriptionText;
+    private TextArea descriptionText;
 
     @FXML
     private Button editBtn;
 
     @FXML
-    private Text movementTypeText;
+    private TextField movementTypeText;
 
     @FXML
-    private Text nameText;
+    private TextField nameText;
 
     @FXML
-    private Text urlText;
-
-    private int exerciseId;
+    private TextField urlText;
 
     private ExerciseTable exercise;
 
@@ -62,7 +61,6 @@ public class ExerciseInfoController implements Initializable {
 
     public void setExercise(ExerciseTable exercise) {
         this.exercise = exercise;
-        exerciseId = exercise.getId();
         nameText.setText(exercise.getName());
         urlText.setText(exercise.getUrl());
         descriptionText.setText(exercise.getDescription());

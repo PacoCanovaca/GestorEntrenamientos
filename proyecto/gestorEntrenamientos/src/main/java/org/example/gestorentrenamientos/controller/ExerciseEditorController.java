@@ -31,8 +31,6 @@ public class ExerciseEditorController implements Initializable {
 
     private int exerciseId;
 
-    private ExerciseTable exercise;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instances();
@@ -82,11 +80,11 @@ public class ExerciseEditorController implements Initializable {
     }
 
     public void setExercise(ExerciseTable exercise) {
-        this.exercise = exercise;
         exerciseId = exercise.getId();
         nameTextField.setText(exercise.getName());
         urlTextField.setText(exercise.getUrl());
         descriptionTextArea.setText(exercise.getDescription());
+        typeComboBox.setValue(exercise.getMovementType());
     }
 
     private boolean existsName(String name) {
