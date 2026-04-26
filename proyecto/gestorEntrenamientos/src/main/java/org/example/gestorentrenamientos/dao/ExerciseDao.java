@@ -38,12 +38,13 @@ public class ExerciseDao {
 
     public void updateExercise(Exercise exercise) throws SQLException{
         connection = DBConnection.getConnection();
-        String query = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", DBExerciseScheme.TAB_NAME, DBExerciseScheme.COL_ID_MOVEMENT, DBExerciseScheme.COL_NAME, DBExerciseScheme.COL_URL, DBExerciseScheme.COL_DESCRIPTION);
+        String query = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?", DBExerciseScheme.TAB_NAME, DBExerciseScheme.COL_ID_MOVEMENT, DBExerciseScheme.COL_NAME, DBExerciseScheme.COL_URL, DBExerciseScheme.COL_DESCRIPTION, DBExerciseScheme.COL_ID);
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, exercise.getMovementType());
         preparedStatement.setString(2, exercise.getName());
         preparedStatement.setString(3, exercise.getUrl());
         preparedStatement.setString(4, exercise.getDescription());
+        preparedStatement.setInt(5, exercise.getId());
         preparedStatement.executeUpdate();
     }
 

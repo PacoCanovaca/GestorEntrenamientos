@@ -48,7 +48,7 @@ public class ExerciseEditorController implements Initializable {
             Alert alert;
             ExerciseDao exerciseDao = new ExerciseDao();
             try {
-                exerciseDao.updateExercise(new Exercise(DataSet.getMovementTypeIdByName(typeComboBox.getSelectionModel().getSelectedItem()), nameTextField.getText(), urlTextField.getText(), descriptionTextArea.getText()));
+                exerciseDao.updateExercise(new Exercise(exerciseId, DataSet.getMovementTypeIdByName(typeComboBox.getSelectionModel().getSelectedItem()), nameTextField.getText(), urlTextField.getText(), descriptionTextArea.getText()));
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ejercicio editado");
                 alert.setContentText("El ejercicio ha sido modificado en la base de datos");
@@ -91,6 +91,9 @@ public class ExerciseEditorController implements Initializable {
 
     private boolean existsName(String name) {
         for (Exercise exercise : DataSet.getExercises()) {
+            if (exerciseId == exercise.getId()) {
+                continue;
+            }
             if (exercise.getName().equalsIgnoreCase(name)) {
                 return true;
             }

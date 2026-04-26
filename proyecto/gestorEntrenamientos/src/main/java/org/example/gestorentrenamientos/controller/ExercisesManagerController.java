@@ -133,6 +133,8 @@ public class ExercisesManagerController implements Initializable {
                 ExerciseDao exerciseDao = new ExerciseDao();
                 try {
                     exerciseDao.deleteExercise(exerciseSelected.getId());
+                    generateExercisesList();
+                    setTableItems();
                 } catch (SQLException e) {
                     alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error de borrado");
