@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<exercises xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="scheme.xsd">
+    <movementType id="1">
+        <name>Tracción vertical</name>
+        <description>Movimiento que consiste en tirar de una carga de arriba hacia abajo, o elevar el propio cuerpo. Se enfoca principalmente en el dorsal ancho y los bíceps.</description>
+        <exercises>
+            <exercise id="1">
+                <name>Dominada</name>
+                <url>https://www.youtube.com/watch?v=un6HKZo2Mhs</url>
+                <description>Subiremos de manera explosiva y aguantaremos la fase de bajada. Al bajar es importante no perder la tensión muscular por completo ni descolgar los hombros.</description>
+            </exercise>
+            <exercise id="2">
+                <name>Jalon al pecho</name>
+                <url>https://www.youtube.com/watch?v=ShqtJk37UPM</url>
+                <description>Tracciona llevando la barra hacia zona del esternón. Los hombros irán hacia atras (simulando sacar pecho), evitaremos que los hombros roten hacia dentro al tracionar. En la fase excéntrica iremos lento y controlado, sin que perdamos tensión al final del rango.</description>
+            </exercise>
+            <exercise id="3">
+                <name>Remo en cuerda</name>
+                <url>https://www.youtube.com/watch?v=vRsHJtFbyDY</url>
+                <description></description>
+            </exercise>
+        </exercises>
+    </movementType>
+    <movementType id="2">
+        <name>Tracción horizontal</name>
+        <description>Movimiento de acercar una carga hacia el torso en un plano horizontal. Trabaja el grosor de la espalda, romboides y trapecios.</description>
+        <exercises>
+            <exercise id="4">
+                <name>Face pull</name>
+                <url>https://www.youtube.com/watch?v=0Po47vvj9g4&amp;pp=ygUJZmFjZSBwdWxs</url>
+                <description>Lleva las manos hacia la altura de la frente, llevando los codos hacia arriba y hacia atras.</description>
+            </exercise>
+            <exercise id="5">
+                <name>Remo con alcance desde abajo</name>
+                <url>https://www.youtube.com/watch?v=I5r_tzXW0S4</url>
+                <description></description>
+            </exercise>
+            <exercise id="6">
+                <name>Renegade Row </name>
+                <url>https://www.youtube.com/watch?v=G1AcX8Y_byg</url>
+                <description>Realizar una flexion estricta  (si no sale puedes apoyar las rodillas para este gesto) y despues tracionamos llevando la mano hacia la cadera manteniendo el torso estable, sin que rote.</description>
+            </exercise>
+        </exercises>
+    </movementType>
+    <movementType id="3">
+        <name>Empuje vertical</name>
+        <description>Acción de alejar un peso hacia arriba, por encima de la cabeza. Su enfoque muscular principal son los deltoides (hombros) y los tríceps.</description>
+        <exercises>
+            <exercise id="7">
+                <name>Elevaciones laterales</name>
+                <url>https://www.youtube.com/watch?v=n_r-ROwHkdA</url>
+                <description>Eleva las mancuernas ligeramente en diagonal, lateralmente y hacia delante. Intentanta que los codos esten extendidos o ligeramente flexionados. Y manten las manos todo y hombro siempre en linea.</description>
+            </exercise>
+            <exercise id="8">
+                <name>Press militar barra</name>
+                <url>https://www.youtube.com/watch?v=_aISMzimYEA</url>
+                <description></description>
+            </exercise>
+            <exercise id="9">
+                <name>Push press</name>
+                <url>https://www.youtube.com/watch?v=d0d0TWaiukA</url>
+                <description></description>
+            </exercise>
+        </exercises>
+    </movementType>
+    <movementType id="4">
+        <name>Empuje horizontal</name>
+        <description>Movimiento que consiste en alejar una carga del pecho hacia el frente en un plano horizontal. Activa principalmente el pectoral, deltoides anterior y tríceps.</description>
+        <exercises>
+            <exercise id="10">
+                <name>Aperturas con mancuernas</name>
+                <url>https://www.youtube.com/watch?v=z8juzhSsFKU</url>
+                <description></description>
+            </exercise>
+            <exercise id="11">
+                <name>Flexiones</name>
+                <url>https://www.youtube.com/watch?v=mm6_WcoCVTA&amp;list=PLyqKj7LwU2RuyZwWCIiDHuFZGN11QW3Ff&amp;index=26</url>
+                <description></description>
+            </exercise>
+            <exercise id="12">
+                <name>Press banca con barra</name>
+                <url>https://www.youtube.com/watch?v=SCVCLChPQFY</url>
+                <description></description>
+            </exercise>
+        </exercises>
+    </movementType>
+</exercises>
