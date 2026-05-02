@@ -1,5 +1,8 @@
 package org.example.gestorentrenamientos.controller;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,12 +17,19 @@ import javafx.stage.Stage;
 import org.example.gestorentrenamientos.Main;
 import org.example.gestorentrenamientos.dao.ExerciseDao;
 import org.example.gestorentrenamientos.data.DataSet;
+import org.example.gestorentrenamientos.dto.ExerciseXml;
+import org.example.gestorentrenamientos.dto.ExercisesWrapperXml;
+import org.example.gestorentrenamientos.dto.MovementTypeXml;
 import org.example.gestorentrenamientos.model.Exercise;
 import org.example.gestorentrenamientos.model.ExerciseTable;
+import org.example.gestorentrenamientos.model.MovementTypes;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -40,6 +50,9 @@ public class ExercisesManagerController implements Initializable {
     private ObservableList<ExerciseTable> exercisesTableList;
 
     private FilteredList<ExerciseTable> filteredExercisesTableList;
+
+    @FXML
+    private Button exportBtn;
 
     @FXML
     private Button filterBtn;
@@ -158,6 +171,7 @@ public class ExercisesManagerController implements Initializable {
                 }
             }
         });
+        exportBtn.setOnAction(event -> exportExercisesXml());
     }
 
     public void setTableItems() {
@@ -203,6 +217,38 @@ public class ExercisesManagerController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Filtro no introducido");
             alert.setContentText("No has introducido ningún filtro");
+            alert.show();
+        }
+    }
+
+    private void exportExercisesXml() {
+        List<MovementTypeXml> movementTypes = new ArrayList<>();
+        Alert alert;
+        for (MovementTypes type : MovementTypes.values()) {
+            if (type == MovementTypes.NULL) continue;
+            List<Exercise> exercisesFiltered = DataSet.getExercises().stream().filter(exercise -> exercise.getMovementType() == type.getId()).toList();
+            List<ExerciseXml> exercisesMapped = exercisesFiltered.stream().map(exercise -> new ExerciseXml(exercise.getId(), exercise.getName(), exercise.getUrl(), exercise.getDescription())).toList();
+            if (!exercisesMapped.isEmpty()) {
+                movementTypes.add(new MovementTypeXml(type.getId(), type.getName(), type.getDescription(), exercisesMapped));
+            }
+        }
+        ExercisesWrapperXml wrapperXml = new ExercisesWrapperXml();
+        wrapperXml.setMovementTypes(movementTypes);
+        try {
+            JAXBContext context = JAXBContext.newInstance(ExercisesWrapperXml.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "ejercicios.xsd");
+            marshaller.marshal(wrapperXml, new File("src/main/resources/xml/exercises.xml"));
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Exportación exitosa");
+            alert.setContentText("Los datos se han exportado correctamente al archivo XML");
+            alert.show();
+        } catch (JAXBException e) {
+            System.out.println(e.getMessage());
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error en la exportación");
+            alert.setContentText("No se han podido exportar los datos al archivo XML");
             alert.show();
         }
     }
