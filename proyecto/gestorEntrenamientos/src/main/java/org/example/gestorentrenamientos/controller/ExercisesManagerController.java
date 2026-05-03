@@ -114,6 +114,8 @@ public class ExercisesManagerController implements Initializable {
         refreshBtn.setOnAction(event -> {
             generateExercisesList();
             setTableItems();
+            filterNameText.setText(null);
+            filterTypeCombo.setValue(null);
         });
         addExerciseBtn.setOnAction(event -> {
             Stage stage = new Stage();
@@ -238,7 +240,7 @@ public class ExercisesManagerController implements Initializable {
             JAXBContext context = JAXBContext.newInstance(ExercisesWrapperXml.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "ejercicios.xsd");
+            marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "scheme.xsd");
             marshaller.marshal(wrapperXml, new File("src/main/resources/xml/exercises.xml"));
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Exportación exitosa");
