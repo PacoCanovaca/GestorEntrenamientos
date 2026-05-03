@@ -1,7 +1,7 @@
-# Gestor Entrenamientos
+# Gestor de Entrenamientos
 
 ## 📖 ¿Qué es este proyecto?
-**Gestor Entrenamientos** es una aplicación de escritorio dirigida al uso personal de entrenadores personales o deportistas particulares. Su objetivo principal es facilitar la gestión y recopilación de ejercicios, funcionando como un repositorio centralizado e interactivo donde el usuario puede almacenar, filtrar y consultar ejercicios de todo tipo. 
+**Gestor de Entrenamientos** es una aplicación de escritorio dirigida al uso personal de entrenadores personales o deportistas particulares. Su objetivo principal es facilitar la gestión y recopilación de ejercicios, funcionando como un repositorio centralizado e interactivo donde el usuario puede almacenar, filtrar y consultar ejercicios de todo tipo. 
 
 En próximas versiones, el sistema ampliará sus capacidades para incluir la creación, planificación y administración de rutinas de entrenamiento completas a partir de los ejercicios guardados. Además, la aplicación permite exportar los datos a formato `.xml`.
 
